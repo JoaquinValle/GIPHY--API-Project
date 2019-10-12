@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    var fruits = ["mango", "pineapple", "apple", "grape", "watermelon", "melon"]
+    var fruits = ["mango", "pineapple", "apple", "orange", "watermelon", "melon"]
 
     for (i = 0; i < fruits.length; i++) {
         let button = $("<button>")
@@ -20,6 +20,9 @@ $(document).ready(function() {
     })
 
     $(".fruit-button").on("click", function() {
+        $("#results").text("")
+        $(".fruit-button").removeAttr("disabled")
+        $(this).attr("disabled", "true")
         var fruit = $(this).attr("id")
         var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=xtOTCHmJ2wr5zCnplnBlO3wLiH97K3kv&q=&limit=10&offset=0&rating=G&lang=en&q=" + fruit
         
@@ -27,11 +30,14 @@ $(document).ready(function() {
             url: queryURL,
             method: "GET"
         }).then(function(response) {
-            $("#results").text(JSON.stringify(response))
-            })
+            console.log(response)
+            for (i = 0; i < 10; i++) {
+                let imgDiv = $("<img>")
+                $(imgDiv).attr("src", response.data[i].images.downsized_large.url)
+                $("#results").append(imgDiv)
+            }
+        })
     })
-
-
 });
 
 
