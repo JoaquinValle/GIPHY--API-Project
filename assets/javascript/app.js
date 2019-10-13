@@ -4,7 +4,8 @@ $(document).ready(function() {
 
     for (i = 0; i < fruits.length; i++) {
         let button = $("<button>")
-        $(button).attr({"id": fruits[i], "class": "fruit-button"})
+        $(button).attr("id", fruits[i])
+        $(button).addClass("fruit-button btn-outline-primary rounded-pill mr-1 mb-2")
         button.text(fruits[i])
         $("#initial-buttons").append(button)
     }
@@ -14,7 +15,8 @@ $(document).ready(function() {
     event.preventDefault()
     var newFruit = $("#add-a-fruit").val()
     let button = $("<button>")
-    $(button).attr({"id": newFruit, "class": "fruit-button"})
+    $(button).attr("id", newFruit)
+    $(button).addClass("fruit-button btn-outline-primary rounded-pill mr-1 mb-2")
     button.text(newFruit)
     $("#initial-buttons").append(button)
     fruitButtonClick()
