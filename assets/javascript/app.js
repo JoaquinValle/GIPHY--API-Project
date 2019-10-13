@@ -13,6 +13,7 @@ $(document).ready(function() {
 
     var colorArr = ["btn-outline-danger", "btn-outline-success", "btn-outline-info", "btn-outline-warning", "btn-outline-dark"]
     var colorCounter = 1
+    var location = true
 
     function fruitButtonClick() {
 
@@ -20,7 +21,7 @@ $(document).ready(function() {
         $(".fruit-button").on("click", function() {
 
             if ($(this).hasClass("clicked")) {
-                if (colorCounter > 4 ) {
+                if (colorCounter > 4) {
                     colorCounter = 0
                     for (i = 0; i < colorArr.length; i++) {
                         $(".fruit-button").removeClass(colorArr[i])
@@ -38,6 +39,7 @@ $(document).ready(function() {
             }
 
             else {
+                location = true
                 clickCounter = 0
                 colorCounter = 0
                 $("#results").text("")
@@ -54,7 +56,7 @@ $(document).ready(function() {
                 colorCounter = 1
             }
 
-            function getAPI(offset){
+            function getAPI(offset) {
                 var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=xtOTCHmJ2wr5zCnplnBlO3wLiH97K3kv&q=&limit=10&offset=" + offset + "&rating=G&lang=en&q=" + fruit
     
                 $.ajax({
@@ -65,7 +67,13 @@ $(document).ready(function() {
                     for (i = 0; i < 10; i++) {
                         let imgDiv = $("<img>")
                         $(imgDiv).attr({"status": "still", "src": response.data[i].images.original_still.url, "data-still": response.data[i].images.original_still.url, "data-animate": response.data[i].images.original.url, "class": "gif"})
-                        $("#results").append(imgDiv)
+                        console.log(response)
+                        if (location) {
+                            $("#results").append(imgDiv)
+                        }
+                        else {
+                            $("#results").prepend(imgDiv)
+                        }
                     }
                     $(".gif").on("click", function() {
                         if ($(this).attr("status") === "still") {
@@ -75,7 +83,7 @@ $(document).ready(function() {
                             $(this).attr({"status": "still", "src": $(this).attr("data-still") })
                         }
                     })
-                    
+                    location = false
                 })
             }
         })
