@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+    var favoriteCounter = 0
+
     var fruits = ["mango", "pineapple", "apple", "orange", "watermelon", "melon"]
     var clickCounter = 0
 
@@ -73,6 +75,7 @@ $(document).ready(function() {
                         let rating = $("<span>")
                         let title = $("<span>")
                         let infoTotal = $("<span>")
+                        let favorite = $("<span><button id='fav'>X</button></span>")
                         $(imgDiv).attr({"status": "still", "src": response.data[i].images.original_still.url, "data-still": response.data[i].images.original_still.url, "data-animate": response.data[i].images.original.url, "class": "gif"})
                         rating.text("Rating: " + response.data[i].rating)
                         title.text("Title: " + response.data[i].title)
@@ -81,6 +84,7 @@ $(document).ready(function() {
                         $(element).append(infoTotal)
                         //$(infoTotal).append(title)
                         $(infoTotal).append(rating)
+                        $(infoTotal).append(favorite)
                         if (location) {
                             $("#gifDiv").append(element)
                         }
@@ -97,6 +101,11 @@ $(document).ready(function() {
                         }
                     })
                     location = false
+
+                    $("#fav").on("click", function() {
+                        console.log($(this).parent().parent().parent())
+                        //localStorage.setItem("favorite_" + favoriteCounter, )
+                    })
                 })
             }
         })
