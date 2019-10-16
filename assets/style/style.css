@@ -1,7 +1,7 @@
 img {
-    width: 220px;
-    height: 220px;
-    margin: 20px 20px 20px 20px
+    width: 200px;
+    height: 200px;
+    margin: 15px 15px 15px 15px
 }
 
 body {
@@ -10,4 +10,9 @@ body {
 
 #gifDiv {
     align-content: center
+}
+
+#info-total {
+    margin-left: 10px;
+    margin-right: 10px
 }

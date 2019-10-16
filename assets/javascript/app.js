@@ -46,7 +46,10 @@ $(document).ready(function() {
                 clickCounter = 0
                 colorCounter = 0
                 $("#results").text("")
-                $("#results").append("<div id='gifDiv'></div>")
+                $("#results").append("<div class='row' id='gifRow'></div>")
+                $("#gifRow").append("<div class='col-12' id='gifDiv'></div>")
+
+
                 $(".fruit-button").removeClass("btn-outline-danger clicked")
                 for (i = 0; i < colorArr.length; i++) {
                     $(".fruit-button").removeClass(colorArr[i])
@@ -75,16 +78,17 @@ $(document).ready(function() {
                         let rating = $("<span>")
                         let title = $("<span>")
                         let infoTotal = $("<span>")
-                        let favorite = $("<span><button id='fav'>X</button></span>")
+                        infoTotal.attr("id", "info-total")
+                        //let favorite = $("<button class='btn rounded btn-outline-info fav'>X</button>")
                         $(imgDiv).attr({"status": "still", "src": response.data[i].images.original_still.url, "data-still": response.data[i].images.original_still.url, "data-animate": response.data[i].images.original.url, "class": "gif"})
-                        rating.text("Rating: " + response.data[i].rating)
+                        rating.text("Rating: " + response.data[i].rating + " ")
                         title.text("Title: " + response.data[i].title)
                         console.log(response)
                         $(element).append(imgDiv)
                         $(element).append(infoTotal)
                         //$(infoTotal).append(title)
                         $(infoTotal).append(rating)
-                        $(infoTotal).append(favorite)
+                        //$(infoTotal).append(favorite)
                         if (location) {
                             $("#gifDiv").append(element)
                         }
@@ -102,10 +106,28 @@ $(document).ready(function() {
                     })
                     location = false
 
-                    $("#fav").on("click", function() {
-                        console.log($(this).parent().parent().parent())
-                        //localStorage.setItem("favorite_" + favoriteCounter, )
-                    })
+                    // $(".fav").on("click", function() {
+                    //     let newFav = $(this).parent().parent().children("img.gif")
+                    //     console.log($(this).parent().parent().children("img.gif"))
+                    //     localStorage.setItem("favorite_" + favoriteCounter, newFav)
+                    //     $(this).removeClass("btn-outline-info")
+                    //     $(this).removeClass("fav")
+                    //     $(this).addClass("btn-info")
+                    //     $(this).addClass("clicked-btn")
+
+                    //     $(".clicked-btn").on("click", function() {
+                    //         let newFav = $(this).parent().parent().children("img.gif")
+                    //         console.log($(this).parent().parent().children("img.gif"))
+                    //         localStorage.removeItem("favorite_" + favoriteCounter, newFav)
+                    //         $(this).removeClass("btn-info")
+                    //         $(this).removeClass("clicked-btn")
+                    //         $(this).addClass("btn-outline-info")
+                    //         $(this).addClass("fav")
+                    //     })
+                    // })
+
+                    
+                    
                 })
             }
         })
